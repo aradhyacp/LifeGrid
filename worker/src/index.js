@@ -62,10 +62,11 @@ async function handleGenerate(request, url, corsHeaders, ctx) {
 
     const country = params.get('country') || 'us';
     const type = params.get('type') || 'year';
-    const bgColor = params.get('bg') || '111114';
-    const accentColor = params.get('accent') || 'FFD700';
+    const bgColor = params.get('bg') || '000000';
+    const accentColor = params.get('accent') || 'FFFFFF';
     const width = parseInt(params.get('width')) || 1179;
     const height = parseInt(params.get('height')) || 2556;
+    const clockHeight = parseFloat(params.get('clockHeight')) || 0.18;  // iPhone clock space
     const dob = params.get('dob');
     const lifespan = parseInt(params.get('lifespan')) || 80;
     const goalDate = params.get('goal');
@@ -81,6 +82,7 @@ async function handleGenerate(request, url, corsHeaders, ctx) {
         bgColor,
         accentColor,
         timezone,
+        clockHeight: Math.min(Math.max(clockHeight, 0), 0.3),  // Limit to reasonable range
         dob,
         lifespan,
         goalDate,
