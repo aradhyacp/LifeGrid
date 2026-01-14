@@ -3,7 +3,8 @@ import { getDateInTimezone, getDayOfYear, getWeekOfYear, getDaysInYear } from '.
 
 /**
  * Generate Year Progress Calendar Wallpaper
- * Shows weeks of the year as a grid, highlighting completed weeks
+ * Shows days of the year as a grid of dots (15 columns), highlighting completed days
+ * Leaves space at top for iPhone clock/date
  */
 export function generateYearCalendar(options) {
     const {
@@ -11,98 +12,83 @@ export function generateYearCalendar(options) {
         height,
         bgColor,
         accentColor,
-        timezone
+        timezone,
+        clockHeight = 0.22
     } = options;
 
     // Get current date in user's timezone
     const { year, month, day } = getDateInTimezone(timezone);
     const dayOfYear = getDayOfYear(year, month, day);
-    const weekOfYear = getWeekOfYear(year, month, day);
     const totalDays = getDaysInYear(year);
 
-    // Layout calculations
-    const cols = 7; // Days per week
-    const rows = Math.ceil(totalDays / cols); // ~52-53 rows
-    const padding = width * 0.08;
-    const topPadding = height * 0.2; // Space for title
-    const bottomPadding = height * 0.12; // Space for stats
+    // Layout calculations - 15 columns
+    const cols = 15;
+    const rows = Math.ceil(totalDays / cols);
+
+    // Leave space for clock at top (with extra padding)
+    // Leave space for clock at top (with extra padding)
+    const clockSpace = height * (clockHeight + 0.05); // Extra 5% clearance
+    const padding = width * 0.20;  // 20% horizontal padding
+    const statsHeight = height * 0.05;
+    const bottomMargin = height * 0.05;
 
     const availableWidth = width - (padding * 2);
-    const availableHeight = height - topPadding - bottomPadding;
+    // Constrain height to avoid grid becoming too tall
+    const availableHeight = height - clockSpace - statsHeight - bottomMargin;
 
-    const gap = Math.max(3, width * 0.005);
+    // Tighter gap
+    const gap = Math.max(3, width * 0.008);
     const cellWidth = (availableWidth - (gap * (cols - 1))) / cols;
-    const cellHeight = (availableHeight - (gap * (rows - 1))) / rows;
-    const cellSize = Math.min(cellWidth, cellHeight);
+    // Keep it roughly square
+    const cellSize = cellWidth;
+    const dotRadius = (cellSize / 2) * 0.85;
 
-    // Center the grid
+    // Center grid horizontally
     const gridWidth = (cellSize * cols) + (gap * (cols - 1));
     const gridHeight = (cellSize * rows) + (gap * (rows - 1));
     const startX = (width - gridWidth) / 2;
-    const startY = topPadding + (availableHeight - gridHeight) / 2;
+    const startY = clockSpace + (height * 0.02);
 
     let content = '';
 
     // Background
     content += rect(0, 0, width, height, parseColor(bgColor));
 
-    // Title - Year
-    content += text(width / 2, topPadding * 0.5, year.toString(), {
-        fill: parseColor(accentColor),
-        fontSize: width * 0.08,
-        fontWeight: '700',
-        textAnchor: 'middle',
-        dominantBaseline: 'middle'
-    });
-
-    // Subtitle
-    content += text(width / 2, topPadding * 0.75, 'Year Progress', {
-        fill: colorWithAlpha('#ffffff', 0.5),
-        fontSize: width * 0.035,
-        fontWeight: '400',
-        textAnchor: 'middle',
-        dominantBaseline: 'middle'
-    });
-
-    // Day grid
+    // Day grid as dots
     for (let i = 0; i < totalDays; i++) {
         const col = i % cols;
         const row = Math.floor(i / cols);
-        const x = startX + col * (cellSize + gap);
-        const y = startY + row * (cellSize + gap);
+        const cx = startX + col * (cellSize + gap) + cellSize / 2;
+        const cy = startY + row * (cellSize + gap) + cellSize / 2;
 
         const isCompleted = i < dayOfYear;
         const isToday = i === dayOfYear - 1;
 
         let fillColor;
+        let radius = dotRadius;
+
         if (isToday) {
             fillColor = parseColor(accentColor);
+            radius = dotRadius * 1.12;  // Only 12% bigger
         } else if (isCompleted) {
-            fillColor = colorWithAlpha(parseColor(accentColor), 0.6);
+            fillColor = colorWithAlpha(parseColor(accentColor), 0.75);
         } else {
-            fillColor = colorWithAlpha('#ffffff', 0.08);
+            fillColor = colorWithAlpha('#ffffff', 0.12);
         }
 
-        content += rect(x, y, cellSize, cellSize, fillColor, cellSize * 0.15);
+        content += circle(cx, cy, radius, fillColor);
     }
 
-    // Stats at bottom
-    const progressPercent = Math.round((dayOfYear / totalDays) * 100);
+    // Stats just below the grid
     const daysRemaining = totalDays - dayOfYear;
+    const progressPercent = Math.round((dayOfYear / totalDays) * 100);
+    const statsY = startY + gridHeight + (height * 0.025);
 
-    content += text(width / 2, height - bottomPadding * 0.6, `${progressPercent}% complete · ${daysRemaining} days remaining`, {
-        fill: colorWithAlpha('#ffffff', 0.4),
-        fontSize: width * 0.03,
-        fontWeight: '400',
-        textAnchor: 'middle',
-        dominantBaseline: 'middle'
-    });
-
-    // Current week indicator
-    content += text(width / 2, height - bottomPadding * 0.3, `Week ${weekOfYear} of 52`, {
-        fill: colorWithAlpha('#ffffff', 0.3),
-        fontSize: width * 0.025,
-        fontWeight: '400',
+    content += text(width / 2, statsY, `${daysRemaining} days left · ${progressPercent}% complete`, {
+        fill: colorWithAlpha('#ffffff', 0.5),
+        fontSize: width * 0.026,
+        fontWeight: '500',
+        fontFamily: '"SF Mono", "Menlo", "Courier New", monospace',
         textAnchor: 'middle',
         dominantBaseline: 'middle'
     });
