@@ -20,14 +20,6 @@ export const devices = [
         clockHeight: 0.18
     },
     {
-        name: "iPhone 17 Plus",
-        width: 1290,
-        height: 2796,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
         name: "iPhone 17",
         width: 1179,
         height: 2556,
@@ -36,33 +28,19 @@ export const devices = [
         clockHeight: 0.18
     },
 
-    // ===== iPhone 16 Series (2024) =====
+    // ===== Dynamic Island 6.7" (14 Pro Max, 15 Plus/Pro Max, 16 Plus) =====
     {
-        name: "iPhone 16 Pro Max",
-        width: 1320,
-        height: 2868,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
-        name: "iPhone 16 Pro",
-        width: 1206,
-        height: 2622,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
-        name: "iPhone 16 Plus",
+        name: "iPhone 14 Pro Max / 15 Plus / 15 Pro Max / 16 Plus",
         width: 1290,
         height: 2796,
         category: "iPhone",
         notchHeight: 0.12,
         clockHeight: 0.18
     },
+
+    // ===== Dynamic Island 6.1" (14 Pro, 15/Pro, 16) =====
     {
-        name: "iPhone 16",
+        name: "iPhone 14 Pro / 15 / 15 Pro / 16",
         width: 1179,
         height: 2556,
         category: "iPhone",
@@ -70,67 +48,19 @@ export const devices = [
         clockHeight: 0.18
     },
 
-    // ===== iPhone 15 Series (2023) =====
+    // ===== Notch 6.7" (13 Pro Max, 14 Plus) =====
     {
-        name: "iPhone 15 Pro Max",
-        width: 1290,
-        height: 2796,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
-        name: "iPhone 15 Pro",
-        width: 1179,
-        height: 2556,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
-        name: "iPhone 15 Plus",
-        width: 1284,
-        height: 2778,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
-        name: "iPhone 15",
-        width: 1179,
-        height: 2556,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-
-    // ===== iPhone 14 Series (2022) =====
-    {
-        name: "iPhone 14 Pro Max",
-        width: 1290,
-        height: 2796,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
-        name: "iPhone 14 Pro",
-        width: 1179,
-        height: 2556,
-        category: "iPhone",
-        notchHeight: 0.12,
-        clockHeight: 0.18
-    },
-    {
-        name: "iPhone 14 Plus",
+        name: "iPhone 13 Pro Max / 14 Plus",
         width: 1284,
         height: 2778,
         category: "iPhone",
         notchHeight: 0.11,
-        clockHeight: 0.25   // Notch phones need more space for time
+        clockHeight: 0.25
     },
+
+    // ===== Notch 6.1" (13/13 Pro, 14) =====
     {
-        name: "iPhone 14",
+        name: "iPhone 13 / 13 Pro / 14",
         width: 1170,
         height: 2532,
         category: "iPhone",
@@ -138,31 +68,7 @@ export const devices = [
         clockHeight: 0.25
     },
 
-    // ===== iPhone 13 Series (2021) =====
-    {
-        name: "iPhone 13 Pro Max",
-        width: 1284,
-        height: 2778,
-        category: "iPhone",
-        notchHeight: 0.11,
-        clockHeight: 0.25
-    },
-    {
-        name: "iPhone 13 Pro",
-        width: 1170,
-        height: 2532,
-        category: "iPhone",
-        notchHeight: 0.11,
-        clockHeight: 0.25
-    },
-    {
-        name: "iPhone 13",
-        width: 1170,
-        height: 2532,
-        category: "iPhone",
-        notchHeight: 0.11,
-        clockHeight: 0.25
-    },
+    // ===== Notch 5.4" (13 mini) =====
     {
         name: "iPhone 13 mini",
         width: 1080,
