@@ -371,36 +371,125 @@
       <h2 class="section-title">Set it and forget it</h2>
     </div>
 
-    <div class="setup-steps">
-      <div class="setup-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>Copy URL</h3>
-          <p>Configure your wallpaper above and copy the generated URL</p>
-        </div>
+    <div class="setup-container">
+      <!-- Sidebar -->
+      <div class="setup-sidebar">
+        <button class="setup-sidebar-item active" data-platform="ios">iOS</button>
+        <button class="setup-sidebar-item" data-platform="android">Android</button>
       </div>
-      <div class="step-connector"></div>
-      <div class="setup-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>Create Shortcut</h3>
-          <p>Open iOS Shortcuts → New Shortcut → "Get Contents of URL"</p>
+
+      <!-- Vertical Divider -->
+      <div class="setup-divider"></div>
+
+      <!-- Content Area -->
+      <div class="setup-content-area">
+        <!-- iOS Steps -->
+        <div class="setup-content-wrapper active" id="setup-ios">
+          <div class="setup-steps">
+            <div class="setup-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>Copy URL</h3>
+                <p>Configure your wallpaper above and copy the generated URL</p>
+              </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="setup-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Create Automation</h3>
+                <p style="text-align: left; font-size: 0.8rem;">
+                  Shortcuts App → Automation Tab → New Automation<br>
+                  Time of Day: <strong>6:00 AM</strong> → Repeat <strong>Daily</strong><br>
+                  Select <strong>Run Immediately</strong> → Create New Shortcut
+                </p>
+              </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="setup-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Configure Shortcut</h3>
+                <p style="text-align: left; font-size: 0.8rem; overflow-wrap: anywhere;">
+                  <strong>1. Get Contents of URL:</strong><br>
+                  <span class="code-snippet">https://lifegrid.aradhyaxstudy.workers.dev/generate?...</span><br><br>
+                  <strong>2. Set Wallpaper Photo:</strong><br>
+                  Choose "Lock Screen" as the target.
+                </p>
+              </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="setup-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h3>Finalize</h3>
+                <div
+                  style="font-weight: 500; background-color: #ffd90054; padding: 4px 10px; border-radius: 4px; display: inline-block; line-height: 1.4; margin-top: 8px;">
+                  <p style="margin: 0; font-size: 0.8rem; color: #FFD700;">
+                    In "Set Wallpaper Photo", tap arrow (→):<br>
+                    Disable <strong>Crop to Subject</strong><br>
+                    Disable <strong>Show Preview</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="step-connector"></div>
-      <div class="setup-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>Set Wallpaper</h3>
-          <p>Add "Set Wallpaper" action → Choose Lock Screen</p>
-        </div>
-      </div>
-      <div class="step-connector"></div>
-      <div class="setup-step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3>Automate</h3>
-          <p>Create automation to run daily at 6:00 AM</p>
+
+        <!-- Android Steps -->
+        <div class="setup-content-wrapper" id="setup-android">
+          <div class="setup-steps">
+            <div class="setup-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>Copy URL</h3>
+                <p>Configure your wallpaper above and copy the generated URL</p>
+              </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="setup-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Prerequisites</h3>
+                <p>Install <strong>MacroDroid</strong> from Google Play Store.</p>
+              </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="setup-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Setup Macro</h3>
+                <p>Trigger: Date/Time → Day/Time (00:01:00) → Active all weekdays</p>
+              </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="setup-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h3>Configure Actions</h3>
+                <p style="text-align: left; font-size: 0.8rem;">
+                  <strong>4.1 Download Image</strong><br>
+                  Web Interactions → HTTP Request (GET)<br>
+                  Paste URL. Enable "Block next actions"<br>
+                  Tick "Save response" → <span class="code-snippet">/Download/lifegrid.png</span><br><br>
+                  <strong>4.2 Set Wallpaper</strong><br>
+                  Device Settings → Set Wallpaper<br>
+                  Select <span class="code-snippet">/Download/lifegrid.png</span><br><br>
+                  <span
+                    style="color: #FFD700; font-weight: 500; background-color: #ffd90054; padding: 4px 10px; border-radius: 4px; display: inline-block; line-height: 1.4; margin-top: 8px;">⚠
+                    Use exact same filename</span>
+                </p>
+              </div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="setup-step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h3>Finalize</h3>
+                <p>Give macro a name → Tap <strong>Create Macro</strong></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
