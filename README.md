@@ -1,4 +1,5 @@
 ![banner](github_banner.png)
+
 # LifeGrid
 
 **Premium Dynamic Wallpapers for iOS and Android Lock Screens.**
@@ -32,11 +33,10 @@ LifeGrid generates high-resolution, data-driven wallpapers that help you visuali
 
 ## Screenshots
 
-|   |   |
-|:---:|:---:|
+|                                                  |                                                  |
+| :----------------------------------------------: | :----------------------------------------------: |
 | <img src="screenshots/IMG_7398.PNG" width="280"> | <img src="screenshots/IMG_7399.PNG" width="280"> |
 | <img src="screenshots/IMG_7400.PNG" width="280"> | <img src="screenshots/IMG_7401.PNG" width="280"> |
-
 
 ## Getting Started
 
@@ -80,17 +80,19 @@ Open `http://localhost:3000` to see the wallpaper generator.
 ## Security
 
 All inputs are sanitized and validated before processing:
+
 - **Zod Schema**: Ensures dimensions, colors, and dates strictly adhere to safe formats.
 - **Output Encoding**: Text inputs are XML-escaped to prevent injection.
 - **Resource Limits**: Max dimensions and memory usage capped to prevent DoS.
 
 ## Supported Devices
 
-Automatically adjusts for:
-- **Dynamic Island**: iPhone 14 Pro/Pro Max, 15 series, 16 series.
-- **Notch**: iPhone 13 series, 14/14 Plus.
-- **Compact**: iPhone 13 mini.
+Automatically adjusts for 50+ devices including:
 
+- **iOS**: All modern iPhones (13 mini to 17 Pro Max). Supports Dynamic Island and Notch.
+- **Android**: Major devices including Samsung Galaxy S series (S22-S24 Ultra) and Google Pixel series (7-9 Pro XL).
+- **Tablets**: iPad Pro, iPad Air, and iPad mini.
+- **Custom**: Supports any resolution via API parameters.
 
 ## 📁 Project Structure
 
@@ -115,26 +117,24 @@ lifegrid/
             └── goal.js # Goal countdown (circle)
 ```
 
-
-
 ## 🔗 API Reference
 
 ```
 GET /generate?country=us&type=year&bg=000000&accent=FFFFFF&width=1179&height=2556
 ```
 
-| Param | Description |
-|-------|-------------|
-| `country` | ISO 2-letter code (`us`, `in`, `gb`) |
-| `type` | `year`, `life`, or `goal` |
-| `bg` | Background color (hex without #) |
-| `accent` | Accent color (hex without #) |
-| `width` | Image width in pixels |
-| `height` | Image height in pixels |
-| `dob` | Date of birth for life calendar |
-| `lifespan` | Expected years (default: 80) |
-| `goal` | Target date for countdown |
-| `goalName` | Name of your goal |
+| Param      | Description                          |
+| ---------- | ------------------------------------ |
+| `country`  | ISO 2-letter code (`us`, `in`, `gb`) |
+| `type`     | `year`, `life`, or `goal`            |
+| `bg`       | Background color (hex without #)     |
+| `accent`   | Accent color (hex without #)         |
+| `width`    | Image width in pixels                |
+| `height`   | Image height in pixels               |
+| `dob`      | Date of birth for life calendar      |
+| `lifespan` | Expected years (default: 80)         |
+| `goal`     | Target date for countdown            |
+| `goalName` | Name of your goal                    |
 
 ## 📱 iOS Shortcut
 
@@ -161,7 +161,6 @@ GET /generate?country=us&type=year&bg=000000&accent=FFFFFF&width=1179&height=255
      ⚠️ **Use exact same filename**
 5. **Finalize**: Give macro a name → Tap **Create Macro**
 
-
 ## Contribution
 
 Contributions are welcome! If you have ideas for new features or bug fixes, please follow these steps:
@@ -175,8 +174,8 @@ Contributions are welcome! If you have ideas for new features or bug fixes, plea
 Please ensure your code follows the existing style and includes appropriate tests.
 
 ## Author
-[![GitHub](https://img.shields.io/badge/GitHub-aradhyacp-181717?style=for-the-badge&logo=github)](https://github.com/aradhyacp)
 
+[![GitHub](https://img.shields.io/badge/GitHub-aradhyacp-181717?style=for-the-badge&logo=github)](https://github.com/aradhyacp)
 
 ## ⭐ Star This Repo
 
@@ -189,4 +188,5 @@ If you find this project useful, please consider giving it a star! It helps othe
 Made with ❤️ for mindful living
 
 <!-- Tags -->
+
 `#ios` `#iphone` `#wallpaper` `#productivity` `#motivation` `#calendar` `#year-progress` `#life-grid` `#goal-tracking` `#cloudflare-workers` `#serverless` `#javascript` `#svg` `#design` `#minimalism`
