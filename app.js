@@ -266,7 +266,7 @@ function bindEvents() {
     });
 
     elements.goalDateInput?.addEventListener('change', (e) => {
-        state.goalDate = e.target.value;
+        state.dob = e.target.value;
         updatePreview();
         updateURL();
     });
