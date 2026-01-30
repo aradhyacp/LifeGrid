@@ -1140,6 +1140,234 @@ body {
   margin-top: 24px;
 }
 
+.step-connector.vertical {
+  width: 1px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+/* Step list for compact bullet points */
+.step-list {
+  list-style: none;
+  text-align: left;
+  margin-top: var(--space-2);
+  padding: 0;
+}
+
+.step-list li {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: var(--space-1) 0;
+  padding-left: var(--space-4);
+  position: relative;
+}
+
+.step-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* Android Steps Layout */
+.android-steps {
+  margin-bottom: 0;
+}
+
+/* Flow connector line */
+.flow-connector {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2) 0;
+}
+
+.flow-connector svg {
+  width: 60px;
+  height: 50px;
+}
+
+.flow-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 8 4;
+  animation: dashFlow 1.5s linear infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+/* Step 4 Container - Full Width Sub-cards */
+.step-4-container {
+  max-width: 800px;
+  margin: 0 auto var(--space-6);
+  padding: var(--space-6);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+
+.step-4-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  justify-content: center;
+}
+
+.step-4-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.step-4-cards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+/* Sub-step Cards */
+.sub-step-card {
+  flex: 1;
+  max-width: 320px;
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.sub-step-card:hover {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.sub-step-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.sub-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--white);
+}
+
+.sub-step-header h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.sub-step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sub-step-list li {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  padding: var(--space-2) 0;
+  padding-left: var(--space-5);
+  position: relative;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.sub-step-list li:last-child {
+  border-bottom: none;
+}
+
+.sub-step-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+  border-radius: 50%;
+}
+
+.sub-step-note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  color: #FFD700;
+  font-weight: 500;
+}
+
+.sub-step-note svg {
+  flex-shrink: 0;
+}
+
+/* Arrow connector between cards */
+.sub-step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* Android Final Step */
+.android-final-step {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+}
+
+.android-final-step .setup-step {
+  max-width: 300px;
+}
+
+/* Responsive for Step 4 */
+@media (max-width: 768px) {
+  .step-4-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sub-step-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .sub-step-arrow {
+    transform: rotate(90deg);
+    padding: var(--space-2) 0;
+  }
+
+  .step-4-container {
+    padding: var(--space-4);
+  }
+}
+
 /* === Footer === */
 .footer {
   border-top: 1px solid var(--border);
@@ -1159,13 +1387,14 @@ body {
   justify-content: center;
 }
 
-.github-footer-href{ 
+.github-footer-href {
   text-decoration: none;
   color: white;
   display: flex;
   gap: 5px;
   align-items: center;
 }
+
 .footer-brand {
   display: inline-flex;
   align-items: center;

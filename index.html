@@ -40,10 +40,17 @@
         <a href="#types" class="nav-link">Wallpapers</a>
         <a href="#customize" class="nav-link">Customize</a>
         <a href="#setup" class="nav-link">Setup</a>
-        <a href="https://github.com/aradhyacp/LifeGrid" class="nav-github nav-link" target="_blank" rel="noopener noreferrer" aria-label="LifeGrid on GitHub">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github-icon lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-        GitHub
-      </a>
+        <a href="https://github.com/aradhyacp/LifeGrid" class="nav-github nav-link" target="_blank"
+          rel="noopener noreferrer" aria-label="LifeGrid on GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-github-icon lucide-github">
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+            <path d="M9 18c-4.51 2-5-2-7-2" />
+          </svg>
+          GitHub
+        </a>
       </div>
     </div>
   </nav>
@@ -443,55 +450,114 @@
 
         <!-- Android Steps -->
         <div class="setup-content-wrapper" id="setup-android">
-          <div class="setup-steps">
+          <div class="setup-steps android-steps">
             <div class="setup-step">
               <div class="step-number">1</div>
               <div class="step-content">
                 <h3>Copy URL</h3>
-                <p>Configure your wallpaper above and copy the generated URL</p>
+                <p>Configure your wallpaper above and copy the generated URL.</p>
               </div>
             </div>
             <div class="step-connector"></div>
             <div class="setup-step">
               <div class="step-number">2</div>
               <div class="step-content">
-                <h3>Prerequisites</h3>
-                <p>Install <strong>MacroDroid</strong> from Google Play Store.</p>
+                <h3>Install MacroDroid</h3>
+                <p>Download and install <strong>MacroDroid</strong> from the Play Store and open it.</p>
               </div>
             </div>
             <div class="step-connector"></div>
             <div class="setup-step">
               <div class="step-number">3</div>
               <div class="step-content">
-                <h3>Setup Macro</h3>
-                <p>Trigger: Date/Time → Day/Time (00:01:00) → Active all weekdays</p>
+                <h3>Set a New Trigger</h3>
+                <p>Tap <strong>Trigger</strong> → <strong>Date/Time</strong></p>
+                <ul class="step-list">
+                  <li>Time: <span class="code-snippet">00:01:00</span></li>
+                  <li>Select all days (Mon–Sun)</li>
+                  <li>Turn <strong>Use Alarm</strong> OFF</li>
+                </ul>
               </div>
             </div>
-            <div class="step-connector"></div>
-            <div class="setup-step">
+          </div>
+
+          <!-- Flow connector between step 3 and step 4 -->
+          <div class="flow-connector">
+            <svg viewBox="0 0 100 60" preserveAspectRatio="none">
+              <path d="M50 0 Q50 30, 50 30 Q50 60, 50 60" class="flow-line" />
+            </svg>
+          </div>
+
+          <!-- Step 4 - Expanded as sub-cards -->
+          <div class="step-4-container">
+            <div class="step-4-header">
               <div class="step-number">4</div>
-              <div class="step-content">
-                <h3>Configure Actions</h3>
-                <p style="text-align: left; font-size: 0.8rem;">
-                  <strong>4.1 Download Image</strong><br>
-                  Web Interactions → HTTP Request (GET)<br>
-                  Paste URL. Enable "Block next actions"<br>
-                  Tick "Save response" → <span class="code-snippet">/Download/lifegrid.png</span><br><br>
-                  <strong>4.2 Set Wallpaper</strong><br>
-                  Device Settings → Set Wallpaper<br>
-                  Select <span class="code-snippet">/Download/lifegrid.png</span><br><br>
-                  <span
-                    style="color: #FFD700; font-weight: 500; background-color: #ffd90054; padding: 4px 10px; border-radius: 4px; display: inline-block; line-height: 1.4; margin-top: 8px;">⚠
-                    Use exact same filename</span>
-                </p>
+              <h3>Configure Actions</h3>
+            </div>
+            <div class="step-4-cards">
+              <!-- 4.1 Card -->
+              <div class="sub-step-card">
+                <div class="sub-step-header">
+                  <span class="sub-step-badge">4.1</span>
+                  <h4>Download Wallpaper</h4>
+                </div>
+                <ul class="sub-step-list">
+                  <li>Tap <strong>Actions</strong> → <strong>+</strong></li>
+                  <li>Select <strong>Web Interaction</strong> → <strong>HTTP Request</strong></li>
+                  <li>Choose <strong>GET</strong> method</li>
+                  <li>Paste your copied URL</li>
+                  <li>Enable <em>Block next action until complete</em></li>
+                  <li>Enable <em>Save HTTP response to file</em></li>
+                  <li>Choose a folder & enter filename:
+                    <span class="code-snippet">wallpaper.png</span>
+                  </li>
+                </ul>
+                <div class="sub-step-note">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4M12 8h.01" />
+                  </svg>
+                  Remember this folder for the next step
+                </div>
+              </div>
+
+              <!-- Arrow connector -->
+              <div class="sub-step-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+
+              <!-- 4.2 Card -->
+              <div class="sub-step-card">
+                <div class="sub-step-header">
+                  <span class="sub-step-badge">4.2</span>
+                  <h4>Set Wallpaper</h4>
+                </div>
+                <ul class="sub-step-list">
+                  <li>Tap <strong>Actions</strong> → <strong>Device Settings</strong> → <strong>Set Wallpaper</strong>
+                  </li>
+                  <li>Choose <strong>Image</strong> → Tap OK</li>
+                  <li>Select <strong>Home Screen & Lock Screen</strong></li>
+                  <li>Choose <strong>Dynamic File Name</strong></li>
+                  <li>Select the <em>same folder</em> as before</li>
+                  <li>Enter the same filename:
+                    <span class="code-snippet">wallpaper.png</span>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="step-connector"></div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="setup-steps android-final-step">
+            <div class="step-connector vertical"></div>
             <div class="setup-step">
               <div class="step-number">5</div>
               <div class="step-content">
-                <h3>Finalize</h3>
-                <p>Give macro a name → Tap <strong>Create Macro</strong></p>
+                <h3>Finalize & Test</h3>
+                <p>Tap the three dots <strong>(⋮)</strong> in the top-right corner and select <strong>Test
+                    Macro</strong> to verify everything works.</p>
               </div>
             </div>
           </div>
@@ -518,9 +584,16 @@
         <span>LifeGrid</span>
       </div>
       <p class="footer-tagline">Time, visualized.</p>
-      <div class="footer-github"> <a href="https://github.com/aradhyacp/LifeGrid" class="github-footer-href" target="_blank" rel="noopener noreferrer" aria-label="LifeGrid on GitHub">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github-icon lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-        GitHub
+      <div class="footer-github"> <a href="https://github.com/aradhyacp/LifeGrid" class="github-footer-href"
+          target="_blank" rel="noopener noreferrer" aria-label="LifeGrid on GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-github-icon lucide-github">
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+            <path d="M9 18c-4.51 2-5-2-7-2" />
+          </svg>
+          GitHub
         </a>
       </div>
     </div>
