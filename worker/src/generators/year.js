@@ -13,8 +13,19 @@ export function generateYearCalendar(options) {
         bgColor,
         accentColor,
         timezone,
-        clockHeight = 0.22
+        timezone,
+        clockHeight = 0.22,
+        lang = 'en'
     } = options;
+
+    const translations = {
+        'en': { daysLeft: 'days left', complete: 'complete' },
+        'zh-cn': { daysLeft: '天剩余', complete: '完成' },
+        'zh-tw': { daysLeft: '天剩餘', complete: '完成' },
+        'ja': { daysLeft: '日 残り', complete: '完了' },
+        'fr': { daysLeft: 'jours restants', complete: 'complété' }
+    };
+    const t = translations[lang] || translations['en'];
 
     // Get current date in user's timezone
     const { year, month, day } = getDateInTimezone(timezone);
@@ -84,8 +95,8 @@ export function generateYearCalendar(options) {
     const progressPercent = Math.round((dayOfYear / totalDays) * 100);
     const statsY = startY + gridHeight + (height * 0.025);
 
-    const statsContent = `<tspan fill="${parseColor(accentColor)}" font-family="Inter" font-weight="500">${daysRemaining} days left</tspan>` +
-        `<tspan fill="rgba(255,255,255,0.5)" font-family="'SF Mono', 'Menlo', 'Courier New', monospace" font-weight="400"> · ${progressPercent}% complete</tspan>`;
+    const statsContent = `<tspan fill="${parseColor(accentColor)}" font-family="Inter" font-weight="500">${daysRemaining} ${t.daysLeft}</tspan>` +
+        `<tspan fill="rgba(255,255,255,0.5)" font-family="'SF Mono', 'Menlo', 'Courier New', monospace" font-weight="400"> · ${progressPercent}% ${t.complete}</tspan>`;
 
     content += text(width / 2, statsY, statsContent, {
         fontSize: width * 0.032,

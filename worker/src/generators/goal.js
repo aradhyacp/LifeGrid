@@ -15,8 +15,19 @@ export function generateGoalCountdown(options) {
         timezone,
         goalDate,
         goalName = 'Goal',
-        clockHeight = 0.18
+        goalName = 'Goal',
+        clockHeight = 0.18,
+        lang = 'en'
     } = options;
+
+    const translations = {
+        'en': { dayLeft: 'day left', daysLeft: 'days left' },
+        'zh-cn': { dayLeft: '天剩余', daysLeft: '天剩余' },
+        'zh-tw': { dayLeft: '天剩餘', daysLeft: '天剩餘' },
+        'ja': { dayLeft: '日 残り', daysLeft: '日 残り' },
+        'fr': { dayLeft: 'jour restant', daysLeft: 'jours restants' }
+    };
+    const t = translations[lang] || translations['en'];
 
     // Get current date in user's timezone
     const { year, month, day } = getDateInTimezone(timezone);
@@ -75,7 +86,7 @@ export function generateGoalCountdown(options) {
     });
 
     // "days left" label
-    content += text(centerX, centerY + height * 0.08, daysRemaining === 1 ? 'day left' : 'days left', {
+    content += text(centerX, centerY + height * 0.08, daysRemaining === 1 ? t.dayLeft : t.daysLeft, {
         fill: colorWithAlpha('#ffffff', 0.5),
         fontSize: width * 0.04,
         fontWeight: '400',

@@ -71,6 +71,21 @@ export default {
             return await handleGenerate(request, url, corsHeaders, ctx);
         }
 
+        if (url.pathname === '/geoip') {
+            const country = request.cf?.country || 'US';
+            // Simple mapping for default language based on country
+            // This can be expanded or handled more robustly
+            let lang = 'en';
+            if (['CN', 'SG'].includes(country)) lang = 'zh-cn';
+            if (['TW', 'HK', 'MO'].includes(country)) lang = 'zh-tw';
+            if (country === 'JP') lang = 'ja';
+            if (['FR', 'BE', 'CH', 'MC'].includes(country)) lang = 'fr';
+
+            return new Response(JSON.stringify({ country, lang }), {
+                headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+            });
+        }
+
         if (url.pathname === '/health') {
             return new Response(JSON.stringify({ status: 'ok' }), {
                 headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -100,7 +115,8 @@ async function handleGenerate(request, url, corsHeaders, ctx) {
             dob: validated.dob,
             lifespan: validated.lifespan,
             goalDate: validated.goal,
-            goalName: validated.goalName
+            goalName: validated.goalName,
+            lang: validated.lang || 'en' // Pass language param
         };
 
         // Generate SVG based on type

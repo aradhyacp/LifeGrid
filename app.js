@@ -4,6 +4,7 @@
  */
 
 import { countries } from './data/countries.js';
+import { locales } from './js/locales.js';
 import { devices, getDevice } from './data/devices.js';
 
 // ===== Configuration =====
@@ -23,8 +24,108 @@ const state = {
     lifespan: 80,
     goalName: 'Goal',
     goalDate: null,
-    selectedDevice: null
+    goalName: 'Goal',
+    goalDate: null,
+    selectedDevice: null,
+    lang: 'en' // Default language
 };
+
+// ===== I18n Class =====
+class I18n {
+    constructor() {
+        this.lang = 'en';
+        this.locales = locales;
+    }
+
+    setLanguage(lang) {
+        if (!this.locales[lang]) return;
+        this.lang = lang;
+        state.lang = lang;
+        localStorage.setItem('lifegrid_lang', lang);
+        
+        // Update DOM
+        document.documentElement.lang = lang;
+        this.updateDocs();
+        
+        // Trigger updates
+        updatePreview();
+        updateURL();
+        populateCountries(); // Refresh country list if we wanted translated names, but they are hardcoded currently
+    }
+
+    t(key) {
+        return this.locales[this.lang]?.[key] || key;
+    }
+
+    updateDocs() {
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (this.locales[this.lang][key]) {
+                if (el.tagName === 'INPUT' && el.getAttribute('placeholder')) {
+                    el.placeholder = this.locales[this.lang][key];
+                } else if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
+                    // Start updates text content if it's a simple node
+                     el.textContent = this.locales[this.lang][key];
+                } else {
+                     // Complex nodes - try to just update the text node if possible, or dangerous innerHTML
+                     // For safety and simplicity in this project, we can replace content
+                     // But we must be careful with nested SVGs (like buttons)
+                     // If element has children, we might need specific targeting or wrap text in span
+                     
+                     // Specific strategy: specific handling or replace textContent if safe
+                     if (el.children.length === 0) {
+                        el.textContent = this.locales[this.lang][key];
+                     }
+                }
+            }
+        });
+
+        // Special handling for elements with mixed content needing specific text updates
+        // e.g. hero-title-line1
+        
+        const replaceText = (id, key) => {
+             const el = document.getElementById(id);
+             if (el) el.textContent = this.t(key);
+        };
+        
+        // Update specific IDs if data-i18n isn't enough
+    }
+    
+    async detectLanguage() {
+        // 1. Check LocalStorage
+        const saved = localStorage.getItem('lifegrid_lang');
+        if (saved && this.locales[saved]) {
+            return saved;
+        }
+
+        // 2. Check GeoIP
+        try {
+            const res = await fetch(`${WORKER_URL}/geoip`);
+            if (res.ok) {
+                const data = await res.json();
+                if (data.lang && this.locales[data.lang]) {
+                    return data.lang;
+                }
+            }
+        } catch (e) {
+            console.log('GeoIP failed:', e);
+        }
+
+        // 3. Fallback to browser
+        const browserLang = navigator.language.toLowerCase();
+        // Simple matching
+        if (browserLang.includes('zh')) {
+            return browserLang.includes('tw') || browserLang.includes('hk') ? 'zh-tw' : 'zh-cn';
+        }
+        if (browserLang.includes('ja')) return 'ja';
+        if (browserLang.includes('fr')) return 'fr';
+        
+        return 'en';
+    }
+}
+
+const i18n = new I18n();
 
 // ===== DOM Elements =====
 const $ = (sel) => document.querySelector(sel);
@@ -62,9 +163,22 @@ function init() {
     populateCardPreviews();
     updateYearStats();
     bindEvents();
+    
+    // Initialize Language
+    i18n.detectLanguage().then(lang => {
+        i18n.setLanguage(lang);
+        updateLanguageSelector(lang);
+    });
+
     autoDetectCountry();
     // Default to iOS
     switchSetupPlatform('ios');
+}
+
+function updateLanguageSelector(lang) {
+    // Only if we have a selector
+    const selector = $('#language-selector');
+    if (selector) selector.value = lang;
 }
 
 // ===== Populate Countries =====
@@ -275,6 +389,14 @@ function bindEvents() {
     // Copy Button
     elements.copyBtn.addEventListener('click', copyURL);
 
+    // Language Selector
+    const langSelector = $('#language-selector');
+    if (langSelector) {
+        langSelector.addEventListener('change', (e) => {
+            i18n.setLanguage(e.target.value);
+        });
+    }
+
     // Sidebar Items
     const setupItems = $$('.setup-sidebar-item');
     setupItems.forEach(item => {
@@ -453,8 +575,8 @@ function drawYearPreview(ctx, width, height) {
     const statsY = startY + gridHeight + (height * 0.03);
 
     // Split text rendering for multi-style
-    const text1 = `${daysLeft} days left`;
-    const text2 = ` · ${percent}% complete`;
+    const text1 = `${daysLeft} ${i18n.t('canvas_days_left')}`;
+    const text2 = ` · ${percent}% ${i18n.t('canvas_complete')}`;
 
     // Configure fonts
     const font1 = `500 ${width * 0.032}px Inter, sans-serif`;
@@ -544,8 +666,8 @@ function drawLifePreview(ctx, width, height) {
     const statsY = startY + gridHeight + (height * 0.035);
 
     // Split text rendering
-    const text1 = `${weeksLeft.toLocaleString()} weeks left`;
-    const text2 = ` · ${percent}% lived`;
+    const text1 = `${weeksLeft.toLocaleString()} ${i18n.t('canvas_weeks_left')}`;
+    const text2 = ` · ${percent}% ${i18n.t('canvas_lived')}`;
 
     const font1 = `500 ${width * 0.026}px Inter, sans-serif`; // Smaller for life cal (52 cols)
     const font2 = `500 ${width * 0.022}px "SF Mono", "Menlo", "Courier New", monospace`;
@@ -611,10 +733,10 @@ function drawGoalPreview(ctx, width, height) {
     ctx.textBaseline = 'middle';
     ctx.fillText(daysRemaining.toString(), centerX, centerY - 4);
 
-    // Label
+    // "days left" label
     ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
     ctx.font = `${width * 0.03}px Inter, sans-serif`;
-    ctx.fillText(daysRemaining === 1 ? 'day left' : 'days left', centerX, centerY + (height * 0.08));
+    ctx.fillText(daysRemaining === 1 ? i18n.t('canvas_day_left') : i18n.t('canvas_days_left'), centerX, centerY + (height * 0.08));
 
 
     // Goal name
@@ -663,6 +785,8 @@ function updateURL() {
         if (state.goalDate) params.set('goal', state.goalDate);
         if (state.goalName) params.set('goalName', encodeURIComponent(state.goalName));
     }
+
+    params.set('lang', state.lang); // Add lang param
 
     const url = `${WORKER_URL}/generate?${params.toString()}`;
     elements.generatedUrl.value = url;
