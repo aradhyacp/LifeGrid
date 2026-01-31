@@ -1,5 +1,19 @@
 import { z } from 'zod';
 
+// Helper to validate that a YYYY-MM-DD string is a real date
+const isValidDate = (dateStr) => {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+    return date.getFullYear() === year &&
+           date.getMonth() === month - 1 &&
+           date.getDate() === day;
+};
+
+// Reusable date schema with format and validity check
+const dateSchema = z.string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format")
+    .refine(isValidDate, "Invalid date - date does not exist");
+
 export const wallpaperSchema = z.object({
     country: z.string().min(2).max(5).default('us').transform(val => val.toLowerCase()),
     type: z.enum(['year', 'life', 'goal']).default('year'),
@@ -10,14 +24,24 @@ export const wallpaperSchema = z.object({
     clockHeight: z.coerce.number().min(0).max(0.5).default(0.18),
 
     // Life Calendar specific
-    dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format").optional(),
+    dob: dateSchema.optional(),
     lifespan: z.coerce.number().int().min(1).max(120).default(80),
 
     // Goal specific
-    goal: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format").optional(),
+    goal: dateSchema.optional(),
+    goalStart: dateSchema.optional(),
     goalName: z.string().max(100, "Goal name too long").default('Goal'),
 
     format: z.enum(['png', 'svg']).default('png')
+}).refine((data) => {
+    // Validate that goalStart is not after goal date
+    if (data.goalStart && data.goal) {
+        return data.goalStart <= data.goal;
+    }
+    return true;
+}, {
+    message: "Goal start date must be on or before the goal date",
+    path: ["goalStart"]
 });
 
 export function validateParams(url) {

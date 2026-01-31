@@ -23,6 +23,7 @@ const state = {
     lifespan: 80,
     goalName: 'Goal',
     goalDate: null,
+    goalStart: null,
     selectedDevice: null
 };
 
@@ -44,6 +45,7 @@ const elements = {
     dobInput: $('#dob-input'),
     lifespanInput: $('#lifespan-input'),
     goalNameInput: $('#goal-name-input'),
+    goalStartInput: $('#goal-start-input'),
     goalDateInput: $('#goal-date-input'),
     lifeConfig: $('#life-config'),
     goalConfig: $('#goal-config'),
@@ -261,6 +263,33 @@ function bindEvents() {
     // Goal Inputs
     elements.goalNameInput?.addEventListener('input', (e) => {
         state.goalName = e.target.value || 'Goal';
+        updatePreview();
+        updateURL();
+    });
+
+    elements.goalStartInput?.addEventListener('change', (e) => {
+        const startValue = e.target.value;
+        const warningEl = document.getElementById('goal-start-warning');
+
+        // Compute today's date in local time (midnight) and compare as Date objects
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let isFuture = false;
+        if (startValue) {
+            // Interpret the input value (YYYY-MM-DD) as a local date at midnight
+            const startDate = new Date(startValue + 'T00:00:00');
+            isFuture = startDate > today;
+        }
+
+        // Show/hide warning if start date is in the future
+        if (isFuture) {
+            warningEl?.classList.remove('hidden');
+        } else {
+            warningEl?.classList.add('hidden');
+        }
+
+        state.goalStart = startValue;
         updatePreview();
         updateURL();
     });
@@ -576,14 +605,34 @@ function drawGoalPreview(ctx, width, height) {
     const centerY = clockSpace + (height - clockSpace) * 0.4;
     const radius = width * 0.25;
 
-    // Calculate days remaining
+    // Calculate days remaining and progress
     let daysRemaining = 0;
     let progress = 0;
     if (state.goalDate) {
         const goal = new Date(state.goalDate);
-        const now = new Date();
+        // Use selected timezone if available for consistency with backend
+        const now = state.timezone
+            ? new Date(new Date().toLocaleString('en-US', { timeZone: state.timezone }))
+            : new Date();
+        now.setHours(0, 0, 0, 0);
+        goal.setHours(0, 0, 0, 0);
         daysRemaining = Math.max(0, Math.ceil((goal - now) / (1000 * 60 * 60 * 24)));
-        progress = Math.min(1, 1 - (daysRemaining / 365));
+
+        // Calculate start date
+        let startDate;
+        if (state.goalStart) {
+            startDate = new Date(state.goalStart);
+            startDate.setHours(0, 0, 0, 0);
+        } else {
+            // Default: assume goal was set 30 days before target (or today if closer)
+            const defaultStart = new Date(goal.getTime() - 30 * 24 * 60 * 60 * 1000);
+            startDate = defaultStart < now ? defaultStart : now;
+        }
+
+        // Total days from start to goal
+        const totalDays = Math.max(1, Math.ceil((goal - startDate) / (1000 * 60 * 60 * 24)));
+        // Progress represents REMAINING time - arc decreases as time passes toward goal
+        progress = Math.min(1, Math.max(0, daysRemaining / totalDays));
     }
 
     // Background circle
@@ -659,6 +708,7 @@ function updateURL() {
     }
 
     if (state.selectedType === 'goal') {
+        if (state.goalStart) params.set('goalStart', state.goalStart);
         if (state.goalDate) params.set('goal', state.goalDate);
         if (state.goalName) params.set('goalName', encodeURIComponent(state.goalName));
     }

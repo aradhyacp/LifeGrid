@@ -100,6 +100,7 @@ async function handleGenerate(request, url, corsHeaders, ctx) {
             dob: validated.dob,
             lifespan: validated.lifespan,
             goalDate: validated.goal,
+            goalStart: validated.goalStart,
             goalName: validated.goalName
         };
 

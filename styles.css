@@ -754,6 +754,17 @@ body {
   border-color: var(--white);
 }
 
+.input-warning {
+  display: block;
+  font-size: 0.75rem;
+  color: #FF6B6B;
+  margin-top: var(--space-2);
+}
+
+.input-warning.hidden {
+  display: none;
+}
+
 .select-arrow {
   position: absolute;
   right: var(--space-4);
