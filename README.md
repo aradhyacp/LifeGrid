@@ -1,4 +1,4 @@
-![banner](github_banner.png)
+![LifeGrid - Dynamic wallpapers that track your time, goals, and life progress](github_banner.png)
 # LifeGrid
 
 **Premium Dynamic Wallpapers for iOS and Android Lock Screens.**
@@ -34,8 +34,8 @@ LifeGrid generates high-resolution, data-driven wallpapers that help you visuali
 
 |   |   |
 |:---:|:---:|
-| <img src="screenshots/IMG_7398.PNG" width="280"> | <img src="screenshots/IMG_7399.PNG" width="280"> |
-| <img src="screenshots/IMG_7400.PNG" width="280"> | <img src="screenshots/IMG_7401.PNG" width="280"> |
+| <img src="screenshots/IMG_7398.PNG" width="280" alt="LifeGrid year progress wallpaper showing 365-day calendar grid"> | <img src="screenshots/IMG_7399.PNG" width="280" alt="LifeGrid life calendar wallpaper displaying weeks of life visualization"> |
+| <img src="screenshots/IMG_7400.PNG" width="280" alt="LifeGrid goal countdown wallpaper with circular progress tracker"> | <img src="screenshots/IMG_7401.PNG" width="280" alt="LifeGrid wallpaper customization interface on iPhone lock screen"> |
 
 
 ## Getting Started

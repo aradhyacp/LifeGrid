@@ -405,6 +405,11 @@ body {
   margin-bottom: var(--space-16);
 }
 
+.config-panel .section-header {
+  text-align: left;
+  margin-bottom: var(--space-8);
+}
+
 .section-eyebrow {
   font-size: 0.75rem;
   font-weight: 600;
@@ -418,6 +423,20 @@ body {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   letter-spacing: -0.03em;
+  margin-bottom: var(--space-4);
+}
+
+.section-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.config-panel .section-description {
+  max-width: none;
+  margin: 0;
 }
 
 /* === Type Cards === */
@@ -766,6 +785,12 @@ body {
 .config-panel .section-header {
   text-align: left;
   margin-bottom: var(--space-8);
+}
+
+.config-panel .section-description {
+  max-width: none;
+  margin: 0;
+  margin-bottom: var(--space-6);
 }
 
 .selected-type-indicator {
@@ -1452,19 +1477,46 @@ body {
 .footer {
   border-top: 1px solid var(--border);
   padding: var(--space-12) var(--space-8);
-  text-align: center;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-12);
+  align-items: start;
+  text-align: left;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color var(--duration-fast) ease-out;
+}
+
+.footer-link:hover {
+  color: var(--text);
 }
 
 .footer-github {
   color: white;
-  margin-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .github-footer-href {
@@ -1473,6 +1525,7 @@ body {
   display: flex;
   gap: 5px;
   align-items: center;
+  transition: opacity var(--duration-fast) ease-out;
 }
 
 .footer-brand {
@@ -1484,10 +1537,6 @@ body {
   margin-bottom: var(--space-3);
 }
 
-.footer-tagline {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-}
 
 /* === Animations === */
 @keyframes fadeInUp {
