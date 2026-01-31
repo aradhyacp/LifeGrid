@@ -15,8 +15,19 @@ export function generateLifeCalendar(options) {
         timezone,
         dob,
         lifespan = 80,
-        clockHeight = 0.22
+        lifespan = 80,
+        clockHeight = 0.22,
+        lang = 'en'
     } = options;
+
+    const translations = {
+        'en': { weeksLeft: 'weeks left', lived: 'lived' },
+        'zh-cn': { weeksLeft: '周剩余', lived: '已度过' },
+        'zh-tw': { weeksLeft: '週剩餘', lived: '已度過' },
+        'ja': { weeksLeft: '週 残り', lived: '経過' },
+        'fr': { weeksLeft: 'semaines restantes', lived: 'vécus' }
+    };
+    const t = translations[lang] || translations['en'];
 
     // Get current date in user's timezone
     const { year, month, day } = getDateInTimezone(timezone);
@@ -98,8 +109,8 @@ export function generateLifeCalendar(options) {
     const weeksRemaining = totalWeeks - weeksLived;
     const statsY = startY + gridHeight + (height * 0.025);
 
-    const statsContent = `<tspan fill="${parseColor(accentColor)}" font-family="Inter" font-weight="500">${weeksRemaining.toLocaleString()} weeks left</tspan>` +
-        `<tspan fill="rgba(255,255,255,0.5)" font-family="'SF Mono', 'Menlo', 'Courier New', monospace" font-weight="400"> · ${progressPercent}% lived</tspan>`;
+    const statsContent = `<tspan fill="${parseColor(accentColor)}" font-family="Inter" font-weight="500">${weeksRemaining.toLocaleString()} ${t.weeksLeft}</tspan>` +
+        `<tspan fill="rgba(255,255,255,0.5)" font-family="'SF Mono', 'Menlo', 'Courier New', monospace" font-weight="400"> · ${progressPercent}% ${t.lived}</tspan>`;
 
     content += text(width / 2, statsY, statsContent, {
         fontSize: width * 0.022,

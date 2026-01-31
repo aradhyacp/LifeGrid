@@ -37,13 +37,21 @@
         <span>LifeGrid</span>
       </a>
       <div class="nav-center">
-        <a href="#types" class="nav-link">Wallpapers</a>
-        <a href="#customize" class="nav-link">Customize</a>
-        <a href="#setup" class="nav-link">Setup</a>
+        <a href="#types" class="nav-link" data-i18n="nav_wallpapers">Wallpapers</a>
+        <a href="#customize" class="nav-link" data-i18n="nav_customize">Customize</a>
+        <a href="#setup" class="nav-link" data-i18n="nav_setup">Setup</a>
       </div>
       <div class="nav-buttons">
         <button class="nav-btn">Theme switch</button>
-        <button class="nav-btn">Il8n switch</button>
+        <div class="lang-select-wrapper">
+          <select id="language-selector" class="nav-btn lang-select">
+            <option value="en">🇺🇸 EN</option>
+            <option value="zh-cn">🇨🇳 简</option>
+            <option value="zh-tw">🇹🇼 繁</option>
+            <option value="ja">🇯🇵 JP</option>
+            <option value="fr">🇫🇷 FR</option>
+          </select>
+        </div>
         <a href="https://github.com/aradhyacp/LifeGrid" class="nav-github nav-link" target="_blank"
           rel="noopener noreferrer" aria-label="LifeGrid on GitHub">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -62,16 +70,16 @@
   <!-- Hero Section -->
   <header class="hero">
     <div class="hero-content">
-      <p class="hero-eyebrow">Dynamic Wallpapers</p>
+      <p class="hero-eyebrow" data-i18n="hero_eyebrow">Dynamic Wallpapers</p>
       <h1 class="hero-title">
-        Your time.<br>
-        <span class="hero-title-accent">Visualized.</span>
+        <span id="hero-title-line1" data-i18n="hero_title_line1">Your time.</span><br>
+        <span class="hero-title-accent" data-i18n="hero_title_accent">Visualized.</span>
       </h1>
-      <p class="hero-subtitle">
+      <p class="hero-subtitle" data-i18n="hero_subtitle">
         Wallpapers that update daily. Track your year, your life, or countdown to your goals.
       </p>
       <a href="#types" class="hero-cta">
-        <span>Get Started</span>
+        <span data-i18n="hero_cta">Get Started</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 5v14M19 12l-7 7-7-7" />
         </svg>
@@ -113,29 +121,29 @@
         <div class="type-card-content">
           <div class="type-card-header">
             <span class="type-number">01</span>
-            <h3 class="type-name">Year Progress</h3>
+            <h3 class="type-name" data-i18n="type_year_name">Year Progress</h3>
           </div>
-          <p class="type-description">
+          <p class="type-description" data-i18n="type_year_desc">
             Every day of the year as a grid. Watch your year fill up, one square at a time.
           </p>
           <div class="type-stats">
             <div class="stat">
               <span class="stat-value" id="year-day">--</span>
-              <span class="stat-label">Day</span>
+              <span class="stat-label" data-i18n="stats_day">Day</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
               <span class="stat-value" id="year-week">--</span>
-              <span class="stat-label">Week</span>
+              <span class="stat-label" data-i18n="stats_week">Week</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
               <span class="stat-value" id="year-percent">--%</span>
-              <span class="stat-label">Complete</span>
+              <span class="stat-label" data-i18n="stats_complete">Complete</span>
             </div>
           </div>
           <button class="type-select-btn">
-            <span>Select</span>
+            <span data-i18n="btn_select">Select</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -153,24 +161,24 @@
         <div class="type-card-content">
           <div class="type-card-header">
             <span class="type-number">02</span>
-            <h3 class="type-name">Life Calendar</h3>
+            <h3 class="type-name" data-i18n="type_life_name">Life Calendar</h3>
           </div>
-          <p class="type-description">
+          <p class="type-description" data-i18n="type_life_desc">
             Every week of your life as a dot. A powerful reminder to make each week count.
           </p>
           <div class="type-stats">
             <div class="stat">
               <span class="stat-value">4,160</span>
-              <span class="stat-label">Total Weeks</span>
+              <span class="stat-label" data-i18n="stats_total_weeks">Total Weeks</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
               <span class="stat-value">80</span>
-              <span class="stat-label">Years</span>
+              <span class="stat-label" data-i18n="stats_years">Years</span>
             </div>
           </div>
           <button class="type-select-btn">
-            <span>Select</span>
+            <span data-i18n="btn_select">Select</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -197,24 +205,24 @@
         <div class="type-card-content">
           <div class="type-card-header">
             <span class="type-number">03</span>
-            <h3 class="type-name">Goal Countdown</h3>
+            <h3 class="type-name" data-i18n="type_goal_name">Goal Countdown</h3>
           </div>
-          <p class="type-description">
+          <p class="type-description" data-i18n="type_goal_desc">
             Count down to what matters. Big launch, vacation, or life milestone.
           </p>
           <div class="type-stats">
             <div class="stat">
               <span class="stat-value">∞</span>
-              <span class="stat-label">Goals</span>
+              <span class="stat-label" data-i18n="stats_goals">Goals</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat">
               <span class="stat-value">Daily</span>
-              <span class="stat-label">Updates</span>
+              <span class="stat-label" data-i18n="stats_daily_updates">Updates</span>
             </div>
           </div>
           <button class="type-select-btn">
-            <span>Select</span>
+            <span data-i18n="btn_select">Select</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -250,15 +258,15 @@
 
         <!-- Selected Type Indicator -->
         <div class="selected-type-indicator" id="selected-type">
-          <span class="indicator-label">Selected:</span>
+          <span class="indicator-label" data-i18n="section_customize_eyebrow">Selected:</span>
           <span class="indicator-value">None</span>
         </div>
 
         <!-- Country -->
         <div class="config-group">
           <label class="config-label">
-            <span class="label-text">Location</span>
-            <span class="label-hint">For accurate timezone</span>
+            <span class="label-text" data-i18n="label_location">Location</span>
+            <span class="label-hint" data-i18n="label_location_hint">For accurate timezone</span>
           </label>
           <div class="select-wrapper">
             <select id="country-select" class="config-select">
@@ -274,13 +282,13 @@
         <!-- Life Calendar Options -->
         <div class="config-group life-only hidden" id="life-config">
           <label class="config-label">
-            <span class="label-text">Date of Birth</span>
+            <span class="label-text" data-i18n="label_dob">Date of Birth</span>
           </label>
           <input type="date" id="dob-input" class="config-input">
 
           <label class="config-label" style="margin-top: 1rem;">
-            <span class="label-text">Expected Lifespan</span>
-            <span class="label-hint">years</span>
+            <span class="label-text" data-i18n="label_lifespan">Expected Lifespan</span>
+            <span class="label-hint" data-i18n="label_lifespan_hint">years</span>
           </label>
           <input type="number" id="lifespan-input" class="config-input" value="80" min="50" max="120">
         </div>
@@ -301,18 +309,18 @@
         <!-- Colors -->
         <div class="config-group">
           <label class="config-label">
-            <span class="label-text">Colors</span>
+            <span class="label-text" data-i18n="label_colors">Colors</span>
           </label>
           <div class="color-row">
             <div class="color-field">
-              <span class="color-field-label">Background</span>
+              <span class="color-field-label" data-i18n="label_bg">Background</span>
               <div class="color-input-wrapper">
                 <input type="color" id="bg-color" value="#000000" class="color-input">
                 <span class="color-hex" id="bg-hex">#000000</span>
               </div>
             </div>
             <div class="color-field">
-              <span class="color-field-label">Accent</span>
+              <span class="color-field-label" data-i18n="label_accent">Accent</span>
               <div class="color-input-wrapper">
                 <input type="color" id="accent-color" value="#FFFFFF" class="color-input">
                 <span class="color-hex" id="accent-hex">#FFFFFF</span>
@@ -346,7 +354,7 @@
         <!-- Device -->
         <div class="config-group">
           <label class="config-label">
-            <span class="label-text">Device</span>
+            <span class="label-text" data-i18n="label_device">Device</span>
             <span class="label-hint" id="device-resolution">1179 × 2556</span>
           </label>
           <div class="select-wrapper">
@@ -363,7 +371,7 @@
         <!-- Generated URL -->
         <div class="config-group url-group">
           <label class="config-label">
-            <span class="label-text">Your Wallpaper URL</span>
+            <span class="label-text" data-i18n="label_url">Your Wallpaper URL</span>
           </label>
           <div class="url-field">
             <input type="text" id="generated-url" class="url-input" readonly placeholder="Configure options above...">
@@ -405,8 +413,8 @@
             <div class="setup-step">
               <div class="step-number">1</div>
               <div class="step-content">
-                <h3>Copy URL</h3>
-                <p>Configure your wallpaper above and copy the generated URL</p>
+                <h3 data-i18n="setup_step_1_title">Copy URL</h3>
+                <p data-i18n="setup_step_1_desc">Configure your wallpaper above and copy the generated URL</p>
               </div>
             </div>
             <div class="step-connector"></div>

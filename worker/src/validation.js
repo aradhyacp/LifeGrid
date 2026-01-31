@@ -17,7 +17,8 @@ export const wallpaperSchema = z.object({
     goal: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format").optional(),
     goalName: z.string().max(100, "Goal name too long").default('Goal'),
 
-    format: z.enum(['png', 'svg']).default('png')
+    format: z.enum(['png', 'svg']).default('png'),
+    lang: z.enum(['en', 'zh-cn', 'zh-tw', 'ja', 'fr']).default('en')
 });
 
 export function validateParams(url) {
