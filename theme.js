@@ -3,6 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeIcon = document.getElementById('theme-icon');
   const body = document.body;
 
+  // If required DOM elements are missing, abort initialization to avoid errors.
+  if (!toggleBtn || !themeIcon) {
+    return;
+  }
   // FIX: Only store the 'inner' HTML (paths), NOT the full <svg> tag
   const sunContent = `
     <circle cx="12" cy="12" r="5"></circle>
