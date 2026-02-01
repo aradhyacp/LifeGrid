@@ -275,8 +275,11 @@
         <div class="config-group life-only hidden" id="life-config">
           <label class="config-label">
             <span class="label-text">Date of Birth</span>
+            <span class="label-hint">Click to open calendar</span>
           </label>
-          <input type="date" id="dob-input" class="config-input">
+          <div class="date-input-wrapper">
+            <input type="date" id="dob-input" class="config-input date-input" min="1920-01-01">
+          </div>
 
           <label class="config-label" style="margin-top: 1rem;">
             <span class="label-text">Expected Lifespan</span>
@@ -294,8 +297,11 @@
 
           <label class="config-label" style="margin-top: 1rem;">
             <span class="label-text">Target Date</span>
+            <span class="label-hint">Click to open calendar</span>
           </label>
-          <input type="date" id="goal-date-input" class="config-input">
+          <div class="date-input-wrapper">
+            <input type="date" id="goal-date-input" class="config-input date-input" min="2026-01-30">
+          </div>
         </div>
 
         <!-- Colors -->

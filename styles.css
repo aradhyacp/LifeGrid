@@ -787,6 +787,22 @@ body {
   color: var(--text-muted);
 }
 
+/* Date Input Wrapper */
+.date-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.date-input-wrapper .date-input {
+  cursor: text;
+  background: transparent;
+  appearance: auto;
+  -webkit-appearance: auto;
+  color-scheme: dark;
+}
+
+
+
 /* Color Fields */
 .color-row {
   display: grid;

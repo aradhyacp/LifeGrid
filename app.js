@@ -57,6 +57,10 @@ const elements = {
 
 // ===== Initialize =====
 function init() {
+    // Set max date
+    const today = new Date().toISOString().split('T')[0];
+    elements.dobInput.max = today;
+    
     populateCountries();
     populateDevices();
     populateCardPreviews();
