@@ -37,6 +37,10 @@
         <span>LifeGrid</span>
       </a>
       <div class="nav-links">
+        <button class="layout-toggle" onclick="toggleLayout()">
+          Switch Layout
+        </button>
+
         <a href="#types" class="nav-link">Wallpapers</a>
         <a href="#customize" class="nav-link">Customize</a>
         <a href="#setup" class="nav-link">Setup</a>
@@ -93,11 +97,16 @@
 
     <div class="type-cards">
       <!-- Year Progress -->
+      <div class="card">
       <article class="type-card" data-type="year">
         <div class="type-card-visual">
           <div class="year-grid-preview">
             <!-- Generated via JS -->
           </div>
+
+          <div class="year-grid-new-preview">
+            <!-- NEW modern layout -->
+          </div> 
         </div>
         <div class="type-card-content">
           <div class="type-card-header">
@@ -131,13 +140,20 @@
           </button>
         </div>
       </article>
-
+      </div>
+      
+      <div class="card">
       <!-- Life Calendar -->
       <article class="type-card" data-type="life">
         <div class="type-card-visual">
           <div class="life-grid-preview">
             <!-- Generated via JS -->
           </div>
+
+          <div class="life-grid-new-preview">
+              <!-- NEW modern layout -->
+          </div> 
+
         </div>
         <div class="type-card-content">
           <div class="type-card-header">
@@ -166,7 +182,11 @@
           </button>
         </div>
       </article>
+      </div>
 
+      
+
+      <div class="card">
       <!-- Goal Countdown -->
       <article class="type-card" data-type="goal">
         <div class="type-card-visual">
@@ -182,6 +202,11 @@
               </div>
             </div>
           </div>
+
+          <div class="goal-preview-new">
+              <!-- NEW modern layout -->
+          </div> 
+          
         </div>
         <div class="type-card-content">
           <div class="type-card-header">
@@ -210,6 +235,9 @@
           </button>
         </div>
       </article>
+      </div>
+
+      
     </div>
   </section>
 

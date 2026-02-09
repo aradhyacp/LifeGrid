@@ -3,8 +3,34 @@
  * Apple-inspired dynamic wallpaper generator
  */
 
+let currentLayout = "default";
+
+// Expose function globally so browser can access it
+window.toggleLayout = function() {
+    let currentLayout = document.body.getAttribute("data-layout") || "default";
+    currentLayout = currentLayout === "default" ? "modern" : "default";
+    document.body.setAttribute("data-layout", currentLayout);
+
+    // Show/hide old and new previews
+    const showNew = currentLayout === "modern";
+
+    // Year Progress
+    document.querySelector('.year-grid-preview').style.display = showNew ? 'none' : 'grid';
+    document.querySelector('.year-grid-new-preview').style.display = showNew ? 'grid' : 'none';
+
+    // Life Calendar
+    document.querySelector('.life-grid-preview').style.display = showNew ? 'none' : 'grid';
+    document.querySelector('.life-grid-new-preview').style.display = showNew ? 'grid' : 'none';
+
+    // Goal Countdown
+    document.querySelector('.goal-preview').style.display = showNew ? 'none' : 'block';
+    document.querySelector('.goal-preview-new').style.display = showNew ? 'block' : 'none';
+}
+
 import { countries } from './data/countries.js';
 import { devices, getDevice } from './data/devices.js';
+
+
 
 // ===== Configuration =====
 const WORKER_URL = 'https://lifegrid.aradhyaxstudy.workers.dev';
@@ -60,13 +86,64 @@ function init() {
     populateCountries();
     populateDevices();
     populateCardPreviews();
+    populateNewPreviews(); 
     updateYearStats();
     bindEvents();
     autoDetectCountry();
     // Default to iOS
     switchSetupPlatform('ios');
 }
+function populateNewPreviews() {
+  // Year Progress modern layout
+    const yearNew = document.querySelector('.year-grid-new-preview');
+    if (yearNew) {
+        yearNew.innerHTML = '';
+        const dayOfYear = getDayOfYear();
+        for (let i = 0; i < 45; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell' + (i < Math.floor(dayOfYear / 8) ? ' filled' : '');
+        yearNew.appendChild(cell);
+        }
+    }
+    // Life Calendar modern layout
+    const lifeNew = document.querySelector('.life-grid-new-preview');
+    if (lifeNew) {
+        lifeNew.innerHTML = '';
+        for (let i = 0; i < 65; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (i < 30 ? ' filled' : ''); // mock filled data
+            lifeNew.appendChild(dot);
+        }
+    }
 
+    // Goal Countdown modern layout
+    // Goal Countdown modern layout
+    const goalNew = document.querySelector('.goal-preview-new');
+    if (goalNew) {
+        // Read the old value from the existing goal-preview
+        const oldGoalElem = document.querySelector('.goal-preview .goal-days');
+        const goalDaysRemaining = oldGoalElem ? parseInt(oldGoalElem.textContent) : 45; // fallback 45
+
+        const totalGoalDays = 100;      // Total goal days (adjust if needed)
+        const progressPercent = Math.min(
+            Math.round((totalGoalDays - goalDaysRemaining) / totalGoalDays * 100),
+            100
+        );
+
+        goalNew.innerHTML = `
+            <div class="goal-circle modern">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" class="goal-circle-bg" />
+                    <circle cx="50" cy="50" r="45" class="goal-circle-progress" style="--progress: ${progressPercent};" />
+                </svg>
+                <div class="goal-number">
+                    <span class="goal-days">${goalDaysRemaining}</span>
+                    <span class="goal-label">days</span>
+                </div>
+            </div>
+        `;
+    }
+}
 // ===== Populate Countries =====
 function populateCountries() {
     countries.forEach(country => {
