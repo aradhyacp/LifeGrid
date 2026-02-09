@@ -121,8 +121,10 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  column-gap: var(--space-6);
+  position: relative;
 }
 
 .nav-logo {
@@ -144,10 +146,14 @@ body {
   transform: rotate(90deg);
 }
 
-.nav-links {
+.nav-center {
   display: flex;
-  gap: var(--space-8);
+  gap: var(--space-6);
   align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .nav-github {
@@ -183,6 +189,80 @@ body {
 
 .nav-link:hover::after {
   width: 100%;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-4);
+  align-items: center;
+}
+.nav-btn {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  font-family: var(--font-sans);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+  padding-right: var(--space-3);
+}
+
+.lang-switch {
+  position: relative;
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  min-width: 180px;
+  padding: var(--space-2);
+  background: var(--gray-950);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  display: none;
+  flex-direction: column;
+  gap: var(--space-1);
+  z-index: 200;
+}
+
+.lang-menu.is-open {
+  display: flex;
+}
+
+.lang-option {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  font-family: var(--font-sans);
+}
+
+.lang-option:hover,
+.lang-option[aria-selected="true"] {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-strong);
 }
 
 /* === Hero Section === */
@@ -754,6 +834,17 @@ body {
   border-color: var(--white);
 }
 
+.input-warning {
+  display: block;
+  font-size: 0.75rem;
+  color: #FF6B6B;
+  margin-top: var(--space-2);
+}
+
+.input-warning.hidden {
+  display: none;
+}
+
 .select-arrow {
   position: absolute;
   right: var(--space-4);
@@ -762,6 +853,22 @@ body {
   pointer-events: none;
   color: var(--text-muted);
 }
+
+/* Date Input Wrapper */
+.date-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.date-input-wrapper .date-input {
+  cursor: text;
+  background: transparent;
+  appearance: auto;
+  -webkit-appearance: auto;
+  color-scheme: dark;
+}
+
+
 
 /* Color Fields */
 .color-row {
@@ -1140,6 +1247,207 @@ body {
   margin-top: 24px;
 }
 
+.step-connector.vertical {
+  width: 1px;
+  height: 50px;
+  margin: 0 auto;
+}
+
+/* Step list for compact bullet points */
+.step-list {
+  list-style: none;
+  text-align: left;
+  margin-top: var(--space-2);
+  padding: 0;
+}
+
+.step-list li {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: var(--space-1) 0;
+  padding-left: var(--space-4);
+  position: relative;
+}
+
+.step-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* Android Steps Layout */
+.android-steps {
+  margin-bottom: 0;
+}
+
+/* Step 4 Container - Full Width Sub-cards */
+.step-4-container {
+  max-width: 800px;
+  margin: var(--space-5) auto var(--space-6);
+  padding: var(--space-6);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+
+.step-4-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  justify-content: center;
+}
+
+.step-4-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.step-4-cards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+/* Sub-step Cards */
+.sub-step-card {
+  flex: 1;
+  max-width: 320px;
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.sub-step-card:hover {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.sub-step-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.sub-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--white);
+}
+
+.sub-step-header h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.sub-step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sub-step-list li {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  padding: var(--space-2) 0;
+  padding-left: var(--space-5);
+  position: relative;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.sub-step-list li:last-child {
+  border-bottom: none;
+}
+
+.sub-step-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+  border-radius: 50%;
+}
+
+.sub-step-note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  color: #FFD700;
+  font-weight: 500;
+}
+
+.sub-step-note svg {
+  flex-shrink: 0;
+}
+
+/* Arrow connector between cards */
+.sub-step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* Android Final Step */
+.android-final-step {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+}
+
+.android-final-step .setup-step {
+  max-width: 300px;
+}
+
+/* Responsive for Step 4 */
+@media (max-width: 768px) {
+  .step-4-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sub-step-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .sub-step-arrow {
+    transform: rotate(90deg);
+    padding: var(--space-2) 0;
+  }
+
+  .step-4-container {
+    padding: var(--space-4);
+  }
+}
+
 /* === Footer === */
 .footer {
   border-top: 1px solid var(--border);
@@ -1159,13 +1467,14 @@ body {
   justify-content: center;
 }
 
-.github-footer-href{ 
+.github-footer-href {
   text-decoration: none;
   color: white;
   display: flex;
   gap: 5px;
   align-items: center;
 }
+
 .footer-brand {
   display: inline-flex;
   align-items: center;
@@ -1271,7 +1580,7 @@ body {
 
 /* === Responsive === */
 @media (max-width: 768px) {
-  .nav-links {
+  .nav-center {
     display: none;
   }
 

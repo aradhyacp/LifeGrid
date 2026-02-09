@@ -14,6 +14,7 @@ export function generateGoalCountdown(options) {
         accentColor,
         timezone,
         goalDate,
+        goalStart,
         goalName = 'Goal',
         clockHeight = 0.18
     } = options;
@@ -32,13 +33,26 @@ export function generateGoalCountdown(options) {
         targetDate = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
     }
 
+    // Parse goal start date (when tracking began)
+    let startDate;
+    if (goalStart) {
+        const [startYear, startMonth, startDay] = goalStart.split('-').map(Number);
+        startDate = new Date(startYear, startMonth - 1, startDay);
+    } else {
+        // Default: assume goal was set 30 days before target (or today if closer)
+        const defaultStart = new Date(targetDate.getTime() - 30 * 24 * 60 * 60 * 1000);
+        startDate = defaultStart < now ? defaultStart : now;
+    }
+
     // Calculate days remaining
     const daysRemaining = Math.max(0, getDaysBetween(now, targetDate));
 
-    // For progress, assume a reasonable span (e.g., from 365 days ago to goal)
-    const totalDays = Math.max(daysRemaining + 1, 365);
-    const daysElapsed = totalDays - daysRemaining;
-    const progress = Math.min(1, daysElapsed / totalDays);
+    // Calculate total duration and progress (remaining time as proportion)
+    const totalDays = Math.max(1, getDaysBetween(startDate, targetDate));
+    // Progress represents REMAINING time - arc decreases as time passes
+    // Clamp slightly below 1 to avoid unreliable full 360° SVG arcs
+    const rawProgress = daysRemaining / totalDays;
+    const progress = Math.max(0, Math.min(1, rawProgress));
 
     // Leave space for clock (with extra padding)
     const clockSpace = height * (clockHeight + 0.05);
