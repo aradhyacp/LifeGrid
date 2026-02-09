@@ -215,7 +215,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: none;
-  padding-right: var(--space-3);
+  height: 30px;
 }
 
 .nav-btn:hover{
@@ -223,6 +223,10 @@ body {
 
 }
 
+#theme-toggle {
+  display: flex;
+  align-items: center;
+}
 .lang-switch {
   position: relative;
 }
@@ -1674,6 +1678,30 @@ body {
   .preview-panel {
     position: relative;
     top: 0;
+  }
+}
+
+/* Responsive: simplify nav on small screens */
+@media (max-width: 600px) {
+  .nav-buttons {
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  /* Hide GitHub link on mobile to reduce clutter */
+  .nav-github {
+    display: none;
+  }
+
+  /* Compact theme and language controls */
+  .nav-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  /* Reduce nav center spacing on smaller phones */
+  .nav-center {
+    gap: 0.5rem;
   }
 }
 
