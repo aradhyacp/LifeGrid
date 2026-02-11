@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeGrid | Visualize Your Time</title>
   <meta name="description"
-    content="Dynamic wallpapers that track your year, life, and goals. Updated daily, automatically.">
+    content="Create dynamic wallpapers that update daily. Track year progress, life calendar, or countdown to goals on your iPhone and Android lock screen.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -14,16 +16,28 @@
     href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LifeGrid",
+    "description": "Dynamic wallpapers that track your time, goals, and life progress on your lock screen",
+    "applicationCategory": "Utilities",
+    "operatingSystem": ["iOS", "Android"]
+  }
+  </script>
 </head>
 
 <body>
   <div class="noise"></div>
 
   <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav-content">
-      <a href="#" class="nav-logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <a href="/" class="nav-logo" aria-label="LifeGrid - Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect x="2" y="2" width="6" height="6" rx="1" fill="currentColor" />
           <rect x="9" y="2" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
           <rect x="16" y="2" width="6" height="6" rx="1" fill="currentColor" opacity="0.3" />
@@ -45,13 +59,20 @@
 
       <div class="nav-buttons">
 
-        <!-- ✅ Your feature: added safely -->
-        <button class="layout-toggle" onclick="toggleLayout()">
-          Switch Layout
-        </button>
+        <!--My feature -->
+      <button class="layout-toggle" onclick="toggleLayout()">
+        Switch Layout
+      </button>
 
-        <!-- Existing functionality -->
-        <button class="nav-btn" data-i18n="nav.themeSwitch">Theme switch</button>
+      <!-- Keep updated theme toggle from main -->
+      <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme">
+        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+             viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
 
         <div class="lang-switch" id="lang-switch">
           <button class="nav-btn lang-btn" id="lang-toggle"
@@ -78,7 +99,9 @@
           class="nav-github nav-link"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="LifeGrid on GitHub">
+          aria-label="Visit LifeGrid on GitHub"
+        >
+      
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-github-icon lucide-github">
@@ -94,8 +117,10 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <header class="hero">
     <div class="hero-content">
       <p class="hero-eyebrow" data-i18n="hero.eyebrow">Dynamic Wallpapers</p>
       <h1 class="hero-title">
@@ -131,7 +156,7 @@
   </header>
 
   <!-- Wallpaper Types Section -->
-  <section id="types" class="section types-section">
+  <section id="types" class="section types-section" aria-labelledby="types-heading">
     <div class="section-header">
       <p class="section-eyebrow" data-i18n="types.eyebrow">Choose Your Style</p>
       <h2 class="section-title" data-i18n="types.title">Three ways to see your time</h2>
@@ -284,7 +309,7 @@
   </section>
 
   <!-- Customization Section -->
-  <section id="customize" class="section customize-section">
+  <section id="customize" class="section customize-section" aria-labelledby="customize-heading">
     <div class="customize-container">
       <!-- Left: Preview -->
       <div class="preview-panel">
@@ -324,7 +349,7 @@
               <option value="" data-i18n="customize.countryPlaceholder">Select country...</option>
             </select>
             <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2">
+              stroke-width="2" aria-hidden="true">
               <path d="M6 9l6 6 6-6" />
             </svg>
           </div>
@@ -424,7 +449,7 @@
 
         <!-- Device -->
         <div class="config-group">
-          <label class="config-label">
+          <label class="config-label" for="device-select">
             <span class="label-text" data-i18n="customize.deviceLabel">Device</span>
             <span class="label-hint" id="device-resolution">1179 × 2556</span>
           </label>
@@ -448,7 +473,7 @@
             <input type="text" id="generated-url" class="url-input" readonly placeholder="Configure options above..."
               data-i18n-attr="placeholder:customize.urlPlaceholder">
             <button class="copy-btn" id="copy-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <rect x="9" y="9" width="13" height="13" rx="2" />
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
               </svg>
@@ -461,7 +486,7 @@
   </section>
 
   <!-- Setup Instructions -->
-  <section id="setup" class="section setup-section">
+  <section id="setup" class="section setup-section" aria-labelledby="setup-heading">
     <div class="section-header">
       <p class="section-eyebrow" data-i18n="setup.eyebrow">Almost There</p>
       <h2 class="section-title" data-i18n="setup.title">Set it and forget it</h2>
@@ -661,25 +686,28 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" aria-label="Site footer">
     <div class="footer-content">
-      <div class="footer-brand">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="2" width="6" height="6" rx="1" fill="currentColor" />
-          <rect x="9" y="2" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
-          <rect x="16" y="2" width="6" height="6" rx="1" fill="currentColor" opacity="0.3" />
-          <rect x="2" y="9" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
-          <rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor" />
-          <rect x="16" y="9" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
-          <rect x="2" y="16" width="6" height="6" rx="1" fill="currentColor" opacity="0.3" />
-          <rect x="9" y="16" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
-          <rect x="16" y="16" width="6" height="6" rx="1" fill="currentColor" />
-        </svg>
-        <span>LifeGrid</span>
-      </div>
+        <div class="footer-brand">
+          <div class="footer-logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="6" height="6" rx="1" fill="currentColor" />
+            <rect x="9" y="2" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
+            <rect x="16" y="2" width="6" height="6" rx="1" fill="currentColor" opacity="0.3" />
+            <rect x="2" y="9" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
+            <rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor" />
+            <rect x="16" y="9" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
+            <rect x="2" y="16" width="6" height="6" rx="1" fill="currentColor" opacity="0.3" />
+            <rect x="9" y="16" width="6" height="6" rx="1" fill="currentColor" opacity="0.5" />
+            <rect x="16" y="16" width="6" height="6" rx="1" fill="currentColor" />
+          </svg>
+          <span>LifeGrid</span>
+          </div>
       <p class="footer-tagline" data-i18n="footer.tagline">Time, visualized.</p>
+      </div>
       <div class="footer-github"> <a href="https://github.com/aradhyacp/LifeGrid" class="github-footer-href"
           target="_blank" rel="noopener noreferrer" aria-label="LifeGrid on GitHub">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -696,6 +724,7 @@
   </footer>
 
   <script type="module" src="app.js"></script>
+  <script src="theme.js"></script>
 </body>
 
 </html>

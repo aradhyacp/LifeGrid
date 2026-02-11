@@ -88,7 +88,10 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
+
+
 
 /* === Noise Texture Overlay === */
 .noise {
@@ -212,9 +215,18 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: none;
-  padding-right: var(--space-3);
+  height: 30px;
 }
 
+.nav-btn:hover{
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+}
+
+#theme-toggle {
+  display: flex;
+  align-items: center;
+}
 .lang-switch {
   position: relative;
 }
@@ -400,9 +412,20 @@ body {
   margin: 0 auto;
 }
 
+.types-section,
+.customize-section {
+  min-height: 100svh;
+  min-height: 100vh;
+}
+
 .section-header {
   text-align: center;
   margin-bottom: var(--space-16);
+}
+
+.config-panel .section-header {
+  text-align: left;
+  margin-bottom: var(--space-8);
 }
 
 .section-eyebrow {
@@ -418,6 +441,20 @@ body {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   letter-spacing: -0.03em;
+  margin-bottom: var(--space-4);
+}
+
+.section-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.config-panel .section-description {
+  max-width: none;
+  margin: 0;
 }
 
 /* === Type Cards === */
@@ -766,6 +803,12 @@ body {
 .config-panel .section-header {
   text-align: left;
   margin-bottom: var(--space-8);
+}
+
+.config-panel .section-description {
+  max-width: none;
+  margin: 0;
+  margin-bottom: var(--space-6);
 }
 
 .selected-type-indicator {
@@ -1458,13 +1501,47 @@ body {
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  
+}
+
+.footer-logo{
+  display: flex;
+  gap: var(--space-2);
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color var(--duration-fast) ease-out;
+}
+
+.footer-link:hover {
+  color: var(--text);
 }
 
 .footer-github {
   color: white;
-  margin-top: 10px;
   display: flex;
-  justify-content: center;
+  width: fit-content;
 }
 
 .github-footer-href {
@@ -1473,21 +1550,23 @@ body {
   display: flex;
   gap: 5px;
   align-items: center;
+  transition: opacity var(--duration-fast) ease-out;
 }
 
 .footer-brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-6);
   color: var(--white);
   font-weight: 600;
-  margin-bottom: var(--space-3);
+
 }
 
 .footer-tagline {
   font-size: 0.875rem;
   color: var(--text-muted);
 }
+
 
 /* === Animations === */
 @keyframes fadeInUp {
@@ -1601,6 +1680,7 @@ body {
     top: 0;
   }
 }
+
 
 /* ===== Modern Layout Preview ===== */
 body[data-layout="modern"] {
@@ -1757,3 +1837,195 @@ body[data-layout="modern"] .card:hover {
 @keyframes progressCircle {
   to { stroke-dashoffset: calc(283 - (283 * var(--progress) / 100)); }
 }
+
+/* Responsive: simplify nav on small screens */
+@media (max-width: 600px) {
+  .nav-buttons {
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  /* Hide GitHub link on mobile to reduce clutter */
+  .nav-github {
+    display: none;
+  }
+
+  /* Compact theme and language controls */
+  .nav-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  /* Reduce nav center spacing on smaller phones */
+  .nav-center {
+    gap: 0.5rem;
+  }
+}
+
+
+/* =========================================
+   Light Mode Overrides
+   ========================================= */
+
+body.light-mode {
+  /* 1. Invert the Semantic Colors */
+  --bg: #ffffff;             /* was var(--black) */
+  --bg-elevated: #f3f4f6;    /* was var(--gray-950) */
+  
+  --text: #171717;           /* was var(--white) */
+  --text-secondary: #525252; /* was var(--gray-400) */
+  --text-muted: #a3a3a3;     /* was var(--gray-600) */
+  
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.2);
+  
+  --accent: #000000;         /* Invert accent to black */
+}
+
+/* =========================================
+   Light Mode - Professional & Modern Polish
+   ========================================= */
+
+body.light-mode {
+  /* --- 1. Refined Palette (Apple-style Soft Whites) --- */
+  --bg: #ffffff;              /* Pure white page background */
+  --bg-color: #ffffff;
+  --bg-elevated: #f5f5f7;     /* Very subtle grey for contrast areas */
+  
+  --text: #111827;            /* Deep charcoal, softer than pure black */
+  --text-color: #111827;
+  --text-secondary: #4b5563;  /* Cool grey for subtitles */
+  --text-muted: #9ca3af;      /* Light grey for hints */
+  
+  --border: #e5e7eb;          /* Light border */
+  --border-strong: #d1d5db;   /* slightly darker border for inputs */
+  
+  --accent: #000000;          /* Strong accent */
+}
+
+/* --- 2. Fix the "Invisible" Input Fields --- */
+/* This forces inputs to be White with Dark Text */
+body.light-mode .config-select, 
+body.light-mode .config-input,
+body.light-mode .url-input,
+body.light-mode .color-input-wrapper,
+body.light-mode .device-btn {
+  background-color: #ffffff;
+  border-color: var(--border-strong);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Subtle depth */
+}
+
+body.light-mode .select-arrow {
+  color: var(--text-secondary);
+}
+
+body.light-mode .color-hex {
+  color: var(--text-secondary);
+}
+
+body.light-mode .preset-btn {
+  background: #ffffff;
+  border-color: var(--border);
+}
+
+/* --- 3. Card "Pop" (Depth & Shadows) --- */
+/* Makes cards stand out against the white background */
+body.light-mode .type-card {
+  background: #ffffff;
+  border-color: var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+body.light-mode .type-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  border-color: var(--text-muted);
+}
+
+/* Visual Area (Top of card) - Subtle Grey */
+body.light-mode .type-card-visual {
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+/* --- 4. Fix Grid/Dot Visibility --- */
+/* Empty dots are faint grey, filled dots are dark charcoal */
+body.light-mode .year-grid-preview .cell,
+body.light-mode .life-grid-preview .dot {
+  background: #e5e7eb; 
+}
+
+body.light-mode .year-grid-preview .cell.filled,
+body.light-mode .life-grid-preview .dot.filled {
+  background: var(--text);
+}
+
+/* Fix Goal Circle (SVG Stroke) */
+body.light-mode .goal-circle-bg { stroke: #e5e7eb; }
+body.light-mode .goal-circle-progress { stroke: var(--text); }
+
+/* --- 5. Selected State Logic --- */
+body.light-mode .type-card.selected {
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px var(--text), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .type-card.selected .type-select-btn {
+  background: var(--text);
+  color: #ffffff;
+  border-color: var(--text);
+}
+
+body.light-mode .type-select-btn:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-color: var(--text);
+}
+
+/* --- 6. Section & Text Fixes --- */
+/* Adds a very subtle gradient to the Customize section to separate it */
+body.light-mode .customize-section {
+  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  border-top-color: var(--border);
+}
+
+body.light-mode .hero-title-accent {
+  background: linear-gradient(135deg, #000000 0%, #666666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.light-mode .nav {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+body.light-mode .nav-logo { color: var(--text); }
+body.light-mode .footer-github .github-footer-href { color: var(--text-secondary); }
+body.light-mode .noise { filter: invert(1); opacity: 0.03; }
+
+
+/* --- Fix Navigation Hovers in Light Mode --- */
+
+/* 1. Make text turn Dark on hover (instead of White) */
+body.light-mode .nav-link:hover,
+body.light-mode .nav-github:hover {
+  color: var(--text); /* Uses the dark charcoal color (#111827) */
+}
+
+/* 2. Make the underline effect Dark (instead of White) */
+body.light-mode .nav-link::after {
+  background: var(--text);
+}
+
+/* 3. Fix the "Theme Switch" & "I18n" buttons on hover */
+body.light-mode .nav-btn:hover {
+  background-color: var(--bg-elevated); /* Light grey background */
+  color: var(--text);                   /* Dark text */
+  border-color: var(--border-strong);
+}
+
