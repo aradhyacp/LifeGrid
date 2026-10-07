@@ -189,6 +189,12 @@ const TRANSLATIONS = {
                 }
             }
         },
+        cta: {
+            eyebrow: 'Start Today',
+            title: 'Make the days count.',
+            subtitle: 'Pick a wallpaper, set it once, and let your lock screen keep the tally.',
+            button: 'Build Your Wallpaper'
+        },
         footer: {
             tagline: 'Time, visualized.'
         },
@@ -1402,10 +1408,8 @@ function updatePreview() {
     const scale = 0.8;
     canvas.width = state.width * scale;
     canvas.height = state.height * scale;
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.objectFit = 'contain';
-    canvas.style.borderRadius = '24px';
+    // Sizing/cropping is owned by .device-screen > canvas in styles.css so the
+    // wallpaper fills the screen edge to edge instead of letterboxing.
 
 
     // Background
