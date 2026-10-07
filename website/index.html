@@ -8,29 +8,14 @@
   <meta name="description"
     content="Create dynamic wallpapers that update daily. Track year progress, life calendar, or countdown to goals on your iPhone and Android lock screen.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <meta name="theme-color" content="#fdfcfc">
-  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <!-- Inter 300 stands in for Waldenburg Light (design.md §4 substitutes);
-       Geist Mono carries technical micro-copy. -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist+Mono:wght@400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script>
-    // Set the theme before first paint so the canvas never flashes.
-    (function () {
-      try {
-        // Light is the system's canvas; dark is opt-in only.
-        var t = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
-    })();
-  </script>
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -46,6 +31,8 @@
 </head>
 
 <body>
+  <div class="noise"></div>
+
   <!-- Navigation -->
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-content">
@@ -332,7 +319,7 @@
             <input type="date" id="dob-input" class="config-input date-input" min="1920-01-01">
           </div>
 
-          <label class="config-label config-label--spaced">
+          <label class="config-label" style="margin-top: 1rem;">
             <span class="label-text" data-i18n="customize.lifespanLabel">Expected Lifespan</span>
             <span class="label-hint" data-i18n="customize.lifespanHint">years</span>
           </label>
@@ -347,7 +334,7 @@
           <input type="text" id="goal-name-input" class="config-input" placeholder="Product Launch"
             data-i18n-attr="placeholder:customize.goalNamePlaceholder">
 
-          <label class="config-label config-label--spaced">
+          <label class="config-label" style="margin-top: 1rem;">
             <span class="label-text" data-i18n="customize.goalStartLabel">Start Date</span>
             <span class="label-hint" data-i18n="customize.goalStartHint">When you began (today or past)</span>
           </label>
@@ -355,7 +342,7 @@
           <span class="input-warning hidden" id="goal-start-warning" data-i18n="customize.goalStartWarning">Start
             date should be today or in the past</span>
 
-          <label class="config-label config-label--spaced">
+          <label class="config-label" style="margin-top: 1rem;">
             <span class="label-text" data-i18n="customize.goalTargetLabel">Target Date</span>
             <span class="label-hint" data-i18n="customize.goalTargetHint">Click to open calendar</span>
           </label>
@@ -486,7 +473,7 @@
               <div class="step-number">2</div>
               <div class="step-content">
                 <h3 data-i18n="setup.step2.title">Create Automation</h3>
-                <p data-i18n-html="setup.step2.desc">
+                <p style="text-align: left; font-size: 0.8rem;" data-i18n-html="setup.step2.desc">
                   Shortcuts App → Automation Tab → New Automation<br>
                   Time of Day: <strong>6:00 AM</strong> → Repeat <strong>Daily</strong><br>
                   Select <strong>Run Immediately</strong> → Create New Shortcut
@@ -498,7 +485,7 @@
               <div class="step-number">3</div>
               <div class="step-content">
                 <h3 data-i18n="setup.step3.title">Configure Shortcut</h3>
-                <p class="step-url-note"
+                <p style="text-align: left; font-size: 0.8rem; overflow-wrap: anywhere;"
                   data-i18n-html="setup.step3.desc">
                   <strong>1. Get Contents of URL:</strong><br>
                   <span class="code-snippet">https://lifegrid.aradhyaxstudy.workers.dev/generate?...</span><br><br>
@@ -512,13 +499,9 @@
               <div class="step-number">4</div>
               <div class="step-content">
                 <h3 data-i18n="setup.step4.title">Finalize</h3>
-                <div class="step-callout">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 16v-4M12 8h.01" />
-                  </svg>
-                  <p data-i18n-html="setup.step4.desc">
+                <div
+                  style="font-weight: 500; background-color: #ffd90054; padding: 4px 10px; border-radius: 4px; display: inline-block; line-height: 1.4; margin-top: 8px;">
+                  <p style="margin: 0; font-size: 0.8rem; color: #FFD700;" data-i18n-html="setup.step4.desc">
                     In "Set Wallpaper Photo", tap arrow (→):<br>
                     Disable <strong>Crop to Subject</strong><br>
                     Disable <strong>Show Preview</strong>
@@ -566,13 +549,15 @@
                 </ul>
               </div>
             </div>
-            <div class="step-connector"></div>
-            <!-- Step 4 - Expanded as sub-cards -->
-            <div class="setup-step step-4-container">
+          </div>
+          <div class="step-connector vertical"></div>
+          <!-- Step 4 - Expanded as sub-cards -->
+          <div class="step-4-container">
+            <div class="step-4-header">
               <div class="step-number">4</div>
-              <div class="step-content">
-                <h3 data-i18n="setup.androidSteps.step4.title">Configure Actions</h3>
-                <div class="step-4-cards">
+              <h3 data-i18n="setup.androidSteps.step4.title">Configure Actions</h3>
+            </div>
+            <div class="step-4-cards">
               <!-- 4.1 Card -->
               <div class="sub-step-card">
                 <div class="sub-step-header">
@@ -634,13 +619,13 @@
                     <span class="code-snippet">wallpaper.png</span>
                   </li>
                 </ul>
-                </div>
               </div>
             </div>
-            </div>
+          </div>
 
-            <!-- Step 5 -->
-            <div class="step-connector"></div>
+          <!-- Step 5 -->
+          <div class="setup-steps android-final-step">
+            <div class="step-connector vertical"></div>
             <div class="setup-step">
               <div class="step-number">5</div>
               <div class="step-content">
@@ -652,28 +637,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pre-footer CTA band: canvas section holding one atmospheric card
-       (design.md §8 cta-band + atmospheric-card, layered per §27) -->
-  <section class="section cta-band" aria-labelledby="cta-heading">
-    <div class="cta-card atmos atmos--amber">
-      <div class="atmos-scrim"></div>
-      <div class="cta-card-content">
-        <p class="cta-eyebrow" data-i18n="cta.eyebrow">Start Today</p>
-        <h2 class="cta-title" id="cta-heading" data-i18n="cta.title">Make the days count.</h2>
-        <p class="cta-subtitle" data-i18n="cta.subtitle">
-          Pick a wallpaper, set it once, and let your lock screen keep the tally.
-        </p>
-        <a href="#customize" class="cta-button">
-          <span data-i18n="cta.button">Build Your Wallpaper</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
       </div>
     </div>
   </section>
